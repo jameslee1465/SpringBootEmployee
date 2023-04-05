@@ -1,6 +1,9 @@
 package com.employee.springboot.model;
 
+import java.util.List;
+
 import javax.persistence.*;
+
 @Entity
 @Table(name = "employees")
 public class Employee {
@@ -23,6 +26,10 @@ public class Employee {
 	
 	@Column(name = "status")
 	private String status;
+	
+//	@OneToMany(cascade = CascadeType.ALL)
+//	@JoinColumn(name ="tdl_fk", referencedColumnName = "id")
+//	private List<ToDoList> TDL;
 
 	public long getId() {
 		return id;

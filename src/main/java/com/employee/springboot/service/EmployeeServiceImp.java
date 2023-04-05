@@ -41,5 +41,11 @@ public class EmployeeServiceImp implements EmployeeService{
     public void deleteEmp(long id) {
         this.employeeRepository.deleteById(id);
     }
+    
+    @Override
+    public Optional<Employee> getTDLByEmpId(long id){
+    	Optional<Employee> employee = employeeRepository.findById(id);
+    	return employee;
+    }
 
 }

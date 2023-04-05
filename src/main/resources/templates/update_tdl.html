@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="utf-8" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>ToDoList | Update</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <h1>To Do List</h1>
+        <hr>
+        <h2>Update ToDoList</h2>
+
+        <form action="#" th:action="@{/saveTDL}" th:object="${TDL}" method="POST">
+
+            <!-- Add hidden form field to handle update -->
+            <input type="hidden" th:field="*{tid}" />
+
+            <select th:field="*{empId}" class="form-control mb-4 col-4">
+            	<option th:each="Emp : ${Emp}" th:value="${Emp.id}" th:text="${Emp.name}"></option>
+            </select>
+
+            <input type="text" th:field="*{task}" placeholder="Task" class="form-control mb-4 col-4" required>
+            
+            <select th:field="*{status}" class="form-control mb-4 col-4">
+            	<option value="0">Undone</option>
+            	<option value="1">Done</option>
+            </select>
+
+            <button type="submit" class="btn btn-info col-2"> Update ToDoList</button>
+        </form>
+
+        <hr>
+
+        <a th:href="@{/tdl}"> Back to To Do List</a>
+    </div>
+</body>
+
+</html>

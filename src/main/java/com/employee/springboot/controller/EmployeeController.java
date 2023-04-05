@@ -19,10 +19,10 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     // display list of employees
-    @GetMapping("/")
+    @GetMapping("/emp")
     public String indexPage(Model model) {
         model.addAttribute("empList", employeeService.getAllEmp());
-        return "index";
+        return "index_emp";
     }
 
     @GetMapping("/createEmp")
@@ -44,11 +44,11 @@ public class EmployeeController {
         return "update_emp";
     }
     
-    @PostMapping("/saveChange")
+    @PostMapping("/saveEmp")
     public String saveAndIndex(@ModelAttribute("employee") Employee employee) {
         // save employee to database
         employeeService.saveEmp(employee);
-        return "redirect:/";
+        return "redirect:/emp";
     }
 
     @GetMapping("/deleteEmp/{id}")
@@ -56,6 +56,6 @@ public class EmployeeController {
 
         // call delete employee method 
         this.employeeService.deleteEmp(id);
-        return "redirect:/";
+        return "redirect:/emp";
     }
 }

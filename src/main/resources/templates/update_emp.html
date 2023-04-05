@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="utf-8" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="ISO-8859-1">
@@ -14,27 +14,34 @@
         <hr>
         <h2>Update Employee</h2>
 
-        <form action="#" th:action="@{/saveChange}" th:object="${employee}" method="POST">
+        <form action="#" th:action="@{/saveEmp}" th:object="${employee}" method="POST">
 
             <!-- Add hidden form field to handle update -->
             <input type="hidden" th:field="*{id}" />
 
-            <input type="text" th:field="*{name}" class="form-control mb-4 col-4">
+            <input type="text" th:field="*{name}" class="form-control mb-4 col-4" required>
 
-            <input type="text" th:field="*{email}" class="form-control mb-4 col-4">
+            <input type="text" th:field="*{email}" class="form-control mb-4 col-4" required>
 
-            <input type="text" th:field="*{password}" class="form-control mb-4 col-4">
+            <input type="text" th:field="*{password}" class="form-control mb-4 col-4" required>
             
-            <input type="text" th:field="*{position}" class="form-control mb-4 col-4">
+            <select th:field="*{position}" class="form-control mb-4 col-4">
+            	<option value="staff">staff</option>
+            	<option value="manager">manager</option>
+            </select>
             
-            <input type="text" th:field="*{status}" class="form-control mb-4 col-4">
+            <select th:field="*{status}" class="form-control mb-4 col-4">
+            	<option value="new">new</option>
+            	<option value="general">general</option>
+            	<option value="resigned">resigned</option>
+            </select>
 
             <button type="submit" class="btn btn-info col-2"> Update Employee</button>
         </form>
 
         <hr>
 
-        <a th:href="@{/}"> Back to Employee List</a>
+        <a th:href="@{/emp}"> Back to Employees List</a>
     </div>
 </body>
 
