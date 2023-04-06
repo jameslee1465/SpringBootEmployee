@@ -1,8 +1,11 @@
 package com.employee.springboot.model;
 
-import java.util.List;
+import java.util.Date;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name = "employees")
@@ -21,16 +24,22 @@ public class Employee {
 	@Column(name = "password")
 	private String password;
 	
-	@Column(name = "position")
-	private String position;
+	@Column(nullable = false, columnDefinition = "varchar(20) not null default 'Staff'")
+	@Enumerated(EnumType.STRING)
+	private EmpPositionEnum position;
 	
-	@Column(name = "status")
-	private String status;
+	@Column(nullable = false, columnDefinition = "varchar(20) not null default 'general'")
+	@Enumerated(EnumType.STRING)
+	private EmpStatusEnum status;
 	
-//	@OneToMany(cascade = CascadeType.ALL)
-//	@JoinColumn(name ="tdl_fk", referencedColumnName = "id")
-//	private List<ToDoList> TDL;
-
+	@CreationTimestamp
+	@Column(name = "created_at", updatable = false)
+	private Date created_at;
+	
+	@UpdateTimestamp
+	@Column(name = "updated_at")
+	private Date updated_at;
+	
 	public long getId() {
 		return id;
 	}
@@ -63,21 +72,35 @@ public class Employee {
 		this.password = password;
 	}
 
-	public String getPosition() {
+	public EmpPositionEnum getPosition() {
 		return position;
 	}
 
-	public void setPosition(String position) {
+	public void setPosition(EmpPositionEnum position) {
 		this.position = position;
 	}
 
-	public String getStatus() {
+	public EmpStatusEnum getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(EmpStatusEnum status) {
 		this.status = status;
 	}
 	
-	
+	public Date getCreated_at() {
+		return created_at;
+	}
+
+	public void setCreated_at(Date created_at) {
+		this.created_at = created_at;
+	}
+
+	public Date getUpdated_at() {
+		return updated_at;
+	}
+
+	public void setUpdated_at(Date updated_at) {
+		this.updated_at = updated_at;
+	}
 }

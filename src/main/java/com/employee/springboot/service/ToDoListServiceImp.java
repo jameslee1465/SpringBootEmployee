@@ -47,8 +47,9 @@ public class ToDoListServiceImp implements ToDoListService{
 		this.TDLRepository.deleteById(tid);
 	}
 	
+	//get Employee in Charge
 	@Override
-	public String getPIC(long tid) {
+	public String getEIC(long tid) {
 		Optional < ToDoList > optional = TDLRepository.findById(tid);
 		ToDoList TDL = null;
 		String name = "";

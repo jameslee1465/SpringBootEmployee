@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.employee.springboot.service.EmployeeService;
 import com.employee.springboot.service.ToDoListService;
+import com.employee.springboot.model.EmpStatusEnum;
 import com.employee.springboot.model.Employee;
 import com.employee.springboot.model.ToDoList;
 
@@ -28,7 +29,7 @@ public class ToDoListController {
 	public String indexPage(Model model) {
 		List <ToDoList> TDL =TDLService.getAllTDL();
 		ArrayList<String> names = new ArrayList<String>();
-		TDL.forEach((tdl) -> names.add(TDLService.getPIC(tdl.getTid())));
+		TDL.forEach((tdl) -> names.add(TDLService.getEIC(tdl.getTid())));
 		model.addAttribute("TDL", TDL);
 		model.addAttribute("names", names);
 		return "index_tdl";
@@ -36,17 +37,27 @@ public class ToDoListController {
 	
 	@GetMapping("/createTDL")
 	public String createPage(Model model) {
-		ToDoList TDL = new ToDoList();
-		model.addAttribute("TDL", TDL);
-		model.addAttribute("Emp", EmpService.getAllEmp());
+		List<Employee> Emp = EmpService.getAllEmp();
+		for(int i = 0; i<Emp.size(); i++ ) {
+			if(Emp.get(i).getStatus().equals(EmpStatusEnum.Resigned)) {
+				Emp.remove(i);
+			}
+		}
+		model.addAttribute("TDL", new ToDoList());
+		model.addAttribute("Emp", Emp);
 		return "create_tdl";
 	}
 	
 	@GetMapping("/updateTDL/{tid}")
 	public String updatePage(@PathVariable(value = "tid")long tid, Model model) {
-		ToDoList TDL = TDLService.getTDL(tid);
-		model.addAttribute("TDL", TDL);
-		model.addAttribute("Emp", EmpService.getAllEmp());
+		List<Employee> Emp = EmpService.getAllEmp();
+		for(int i = 0; i<Emp.size(); i++ ) {
+			if(Emp.get(i).getStatus().equals(EmpStatusEnum.Resigned)) {
+				Emp.remove(i);
+			}
+		}
+		model.addAttribute("TDL", TDLService.getTDL(tid));
+		model.addAttribute("Emp", Emp);
 		return "update_tdl";
 	}
 	

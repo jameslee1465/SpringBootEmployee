@@ -9,29 +9,35 @@
 
 <body>
     <div class="container">
-        <h1>To Do List</h1>
+    <br>
+        <h1>Save ToDoList</h1>
         <hr>
-        <h2>Save ToDoList</h2>
 
         <form action="#" th:action="@{/saveTDL}" th:object="${TDL}" method="POST">
+        	<label class="col-form-label"><h5>Employee in Charge: </h5></label>
             <select th:field="*{empId}" class="form-control mb-4 col-4">
             	<option th:each="Emp : ${Emp}" th:value="${Emp.id}" th:text="${Emp.name}"></option>
             </select>
-
+            
             <input type="text" th:field="*{task}" placeholder="Task" class="form-control mb-4 col-4" required>
             
+            <textarea rows="10" th:field="*{description}" placeholder="Task description" class="form-control mb-4 col-4"></textarea>
+            
+            <label class="col-form-label"><h5>Task Status: </h5></label>
             <select th:field="*{status}" class="form-control mb-4 col-4">
-            	<option value="0" selected>Undone</option>
-            	<option value="1">Done</option>
+            	<option th:each="Status : ${T(com.employee.springboot.model.TaskStatusEnum).values()}" 
+            	th:value="${Status}" th:text="${Status}"></option>
             </select>
-
-            <button type="submit" class="btn btn-info col-2"> Save ToDoList</button>
+            
+            <button type="submit" class="btn btn-info col-2"> Save </button>
         </form>
 
         <hr>
 
         <a th:href="@{/tdl}"> Back to To Do List</a>
     </div>
+    <script  src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+  crossorigin="anonymous"></script>
 </body>
 
 </html>

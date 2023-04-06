@@ -9,6 +9,6 @@ public interface ToDoListService {
 	void saveTDL(ToDoList tdl);
 	ToDoList getTDL(long tid);
 	void deleteTDL(long tid);
-	
-	String getPIC(long tid);
+	//get Employee in Charge
+	String getEIC(long tid);
 }

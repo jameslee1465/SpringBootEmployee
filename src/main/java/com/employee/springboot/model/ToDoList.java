@@ -1,12 +1,18 @@
 package com.employee.springboot.model;
 
+import java.util.Date;
+
 import javax.persistence.*;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name = "todolist")
 public class ToDoList {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(nullable = false)
 	private long tid;
 	
 	@Column(name = "empId")
@@ -15,14 +21,20 @@ public class ToDoList {
 	@Column(name = "task")
 	private String task;
 	
-	@Column(name = "status")
-	private Integer status;
+	@Lob
+	private String description;
 	
-	@Column(name = "created_at")
-	private String created_at;
+	@Column(nullable = false, columnDefinition = "varchar(20) not null default 'PENDING'")
+	@Enumerated(EnumType.STRING)
+	private TaskStatusEnum status;
 	
+	@CreationTimestamp
+	@Column(name = "created_at", updatable = false)
+	private Date created_at;
+	
+	@UpdateTimestamp
 	@Column(name = "updated_at")
-	private String updated_at;
+	private Date updated_at;
 
 	public long getTid() {
 		return tid;
@@ -48,27 +60,35 @@ public class ToDoList {
 		this.task = task;
 	}
 
-	public Integer getStatus() {
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public TaskStatusEnum getStatus() {
 		return status;
 	}
 
-	public void setStatus(Integer status) {
+	public void setStatus(TaskStatusEnum status) {
 		this.status = status;
 	}
 	
-	public String getCreated_at() {
+	public Date getCreated_at() {
 		return created_at;
 	}
 
-	public void setCreated_at(String created_at) {
+	public void setCreated_at(Date created_at) {
 		this.created_at = created_at;
 	}
 
-	public String getUpdated_at() {
+	public Date getUpdated_at() {
 		return updated_at;
 	}
 
-	public void setUpdated_at(String updated_at) {
+	public void setUpdated_at(Date updated_at) {
 		this.updated_at = updated_at;
 	}	
 
